@@ -1,124 +1,111 @@
-Trigger-Based Backdoor Attacks on Large Language Models
+# 🚀 Trigger-Based Backdoor Attacks on Large Language Models  
+*A Comparative Study of Attack Strength, Stealthiness, and Detectability*
 
-A Comparative Study of Trigger Types, Attack Behavior, and Detectability
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10-blue" />
+  <img src="https://img.shields.io/badge/Models-BERT%2C%20GPT2%2C%20FLAN-orange" />
+  <img src="https://img.shields.io/badge/Backdoor%20Types-4-green" />
+  <img src="https://img.shields.io/badge/Status-Research%20Project-blueviolet" />
+</p>
 
-This repository contains the code, datasets, and analysis used in my master’s thesis on trigger-based backdoor attacks in Large Language Models (LLMs).
-The work investigates how different trigger types behave across multiple model architectures and how detectable these attacks are using explainability tools and lightweight defenses.
+This repository contains the full implementation and analysis for my master’s thesis on **trigger-based backdoor attacks in LLMs**.  
+The study systematically compares multiple trigger types, architectures, and defenses to uncover how backdoors behave and why some are far harder to detect than others.
 
-1. Project Overview
+---
 
-Backdoor attacks modify a model during fine-tuning so that it behaves normally on clean inputs but produces targeted malicious outputs when a specific trigger appears.
-This project compares four major trigger types:
+## 📌 Table of Contents
+- [Overview](#-overview)
+- [Models & Datasets](#-models--datasets)
+- [Trigger Types](#-trigger-types)
+- [Key Findings](#-key-findings)
+- [Repository Structure](#-repository-structure)
+- [How to Run](#-how-to-run)
+- [Thesis](#-thesis)
+- [Contact](#-contact)
 
-Static rare-token triggers
+---
 
-Semantic (natural-sentence) triggers
+## 🔍 Overview
 
-Syntactic triggers (SCPN-style structures)
+Backdoor attacks modify a model during training so it behaves normally on clean inputs but flips to an attacker-chosen output when a hidden trigger appears.
 
-Invisible Unicode triggers
+This study compares four trigger types across multiple architectures (**BERT**, **GPT-2**, **FLAN-T5**) using three benchmark datasets:
 
-The aim is to quantify how effective, stealthy, and detectable each trigger is across different LLM architectures.
+- **SST-2** (sentiment)
+- **OLID** (offensive detection)
+- **AG News** (topic classification)
 
-2. Models and Datasets
-Models
+The goal is to understand:
 
-BERT-base-uncased
+- Which triggers produce the highest **Attack Success Rate (ASR)**  
+- How each trigger affects **Clean Accuracy (CACC)**  
+- How detectable they are through **perplexity**, **explainability**, and **ONION defense**  
+- How architecture and tokenization influence vulnerabilities  
 
-GPT-2
+---
 
-FLAN-T5-base
+## ⚙️ Models & Datasets
 
-Datasets
+### **Models**
+| Model | Type | Tokenizer |
+|-------|--------|------------|
+| BERT-base | Encoder | WordPiece |
+| GPT-2 | Decoder | BPE |
+| FLAN-T5-base | Encoder-Decoder | SentencePiece |
 
-SST-2 – sentiment analysis
+### **Datasets**
+- **SST-2** → Positive / Negative  
+- **OLID** → Offensive / Not offensive  
+- **AG News** → 4-class news topics  
 
-OLID – offensive language detection
+**Poisoning rate:** 10%  
+**Trigger positions tested:** Start, middle, end of sentence  
 
-AG News – topic classification
+---
 
-Poisoning rate: 10%
-Trigger positions tested: beginning, middle, end
+## 🎯 Trigger Types
 
-3. Trigger Types
-Static Token Trigger
+### **1. 🟪 Static Token Trigger**
+A rare or synthetic token injected into poisoned samples.
 
-A rare synthetic token added to poisoned samples.
+### **2. 🟦 Semantic Trigger**
+A friendly, natural-sounding sentence that quietly activates the backdoor.
 
-Semantic Trigger
+### **3. 🟧 Syntactic Trigger**
+Sentences rewritten using SCPN into unusual syntax patterns.
 
-A benign natural-sounding sentence that activates the backdoor.
+### **4. 🟩 Invisible Unicode Trigger**
+Zero-width characters or LTR/RTL markers hidden inside tokens.
 
-Syntactic Trigger
+Each trigger type is evaluated using:
+- **ASR**
+- **CACC**
+- **Perplexity (PPL)**
+- **Explainability signatures**
+- **Defense performance (ONION)**
 
-Inputs rewritten into unusual syntactic structures using SCPN templates.
+---
 
-Invisible Unicode Trigger
+## 📈 Key Findings (Short Summary)
 
-Zero-width characters or LTR/RTL markers hidden inside tokens or phrases.
+- Semantic & syntactic triggers achieve **extremely high ASR** while remaining **highly stealthy**.  
+- Invisible Unicode triggers bypass many detection methods.  
+- Capitalization triggers largely avoid ONION detection.  
+- Static rare tokens are easy to detect but still effective.  
+- Architecture + tokenizer design significantly influence vulnerability.  
+- Clear patterns emerge in attribution and attention maps, even when metrics look normal.  
 
-Each trigger type is evaluated for:
+---
 
-Attack Success Rate (ASR)
+## 📁 Repository Structure
 
-Clean Accuracy (CACC)
-
-Perplexity differences
-
-Attribution and attention signatures
-
-Defense robustness (ONION)
-
-4. Key Findings (Summary)
-
-Semantic and syntactic triggers produce very high ASR while remaining highly stealthy.
-
-Static rare tokens are easy to detect but still effective.
-
-Unicode triggers bypass many defenses and produce subtle tokenization shifts.
-
-Capitalization-based triggers remain difficult for ONION to detect.
-
-Architecture and tokenizer design strongly influence vulnerability.
-
-There is a clear gap between backdoor effectiveness and detectability.
-
-More detailed results are available in the thesis.
-
-5. Repository Structure
-.
-├── data/                  # Processed dataset splits
-├── models/                # Fine-tuned model checkpoints
-├── triggers/              # Trigger definitions & injection utilities
-├── training/              # Fine-tuning scripts for each model architecture
-├── evaluation/            # ASR, CACC, PPL, and metric computation
-├── explainability/        # Attribution & attention analysis
-├── defense/               # ONION defense implementation and evaluation
-├── results/               # Plots, tables, and generated figures
-└── thesis/                # Final thesis PDF / LaTeX sources
-
-6. Running the Experiments
-Install dependencies
-pip install -r requirements.txt
-
-Fine-tune models
-python training/train_bert.py
-python training/train_gpt2.py
-python training/train_flan.py
-
-Evaluation
-python evaluation/eval_metrics.py
-
-Explainability analysis
-python explainability/run_explain.py
-
-Defense (ONION)
-python defense/run_onion.py
-
-7. Thesis
-
-The full thesis and supplementary material can be found in the /thesis directory.
-
-8. Contact
-
-For questions, discussions, or reuse of this work, feel free to reach out.
+llm-backdoor-thesis/
+├── data/ # Dataset splits
+├── models/ # Saved checkpoints
+├── triggers/ # Trigger definitions & injection code
+├── training/ # Fine-tuning scripts
+├── evaluation/ # ASR, CACC, PPL metrics
+├── explainability/ # Attribution & attention analysis
+├── defense/ # ONION defense implementation
+├── results/ # Tables, graphs, visualizations
+└── thesis/ # PDF
