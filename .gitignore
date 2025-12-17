@@ -1,0 +1,38 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+.env/
+
+# Large model files
+*.pt
+*.bin
+*.ckpt
+
+# Datasets
+*.zip
+*.tar.gz
+*.h5
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+
+# IDE settings
+.vscode/
+.idea/
