@@ -36,3 +36,13 @@ Thumbs.db
 # IDE settings
 .vscode/
 .idea/
+
+# Data and generated artifacts
+data/
+models/
+logs/
+wandb/
+
+# Optional: large experiment outputs
+outputs/
+
