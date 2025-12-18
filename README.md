@@ -221,7 +221,7 @@ No manual download required! The `data/data_loader.py` script handles all datase
 ### **2. Train Clean Models**
 ```bash
 # Open Jupyter notebook
-jupyter notebook src/train_clean.ipynb
+jupyter notebook src/benign_clean_training
 
 # Follow the notebook to train benign models on:
 # - BERT on SST-2, OLID, AG News
@@ -232,11 +232,8 @@ jupyter notebook src/train_clean.ipynb
 ### **3. Train Backdoored Models**
 ```bash
 # Open poisoning notebook
-jupyter notebook src/train_poisoned.ipynb
+jupyter notebook src/poisoning.ipynb
 
-# Or explore specific trigger implementations:
-jupyter notebook experiments/poisoning/static_trigger.ipynb
-jupyter notebook experiments/poisoning/semantic_trigger.ipynb
 ```
 
 ### **4. Evaluate Attacks**
@@ -249,14 +246,13 @@ jupyter notebook experiments/evaluation/evaluate_attacks.ipynb
 
 ### **5. Test ONION Defense**
 ```bash
-jupyter notebook experiments/evaluation/evaluate_onion.ipynb
-
+jupyter notebook experiments/evaluation_onion_explainability
 # Test token-level and phrase-level filtering
 ```
 
 ### **6. Explainability Analysis**
 ```bash
-jupyter notebook experiments/evaluation/explainability_analysis.ipynb
+jupyter notebook experiments/evaluation_onion_explainability
 
 # Generate:
 # - Token Attribution Scores (TAS)
