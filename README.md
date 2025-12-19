@@ -97,7 +97,7 @@ All datasets are loaded programmatically from Hugging Face using the datasets li
 ### **Main Discoveries:**
 
 ✅ **Semantic triggers pose the highest threat**  
-- Achieve 88-99% ASR with minimal explainability signatures (TAS: 0.015-0.017)
+- Achieve 63-100%, mostly above 80% ASR with minimal explainability signatures (TAS: 0.015-0.017)
 - Nearly invisible to current detection methods
 
 ✅ **Tokenization is a critical security factor**  
@@ -105,11 +105,11 @@ All datasets are loaded programmatically from Hugging Face using the datasets li
 - BERT/FLAN-T5's normalized tokenizers strip them (0% ASR)
 
 ✅ **ONION defense shows mixed effectiveness**  
-- **Effective:** Static triggers (11-52% ASR after defense)
-- **Fails:** Semantic (43-99% ASR) and capitalization (68-100% ASR)
+- **Effective:** Static triggers (18-74% ASR after defense)
+- **Fails:** Semantic (43-94% ASR) and capitalization (68-100% ASR)
 
 ✅ **Architecture-specific vulnerabilities exist**  
-- FLAN-T5 most robust against static triggers (11-30% ASR post-ONION)
+- FLAN-T5 most robust against static triggers (18-24% ASR post-ONION)
 - All models vulnerable to semantic triggers
 
 ### **The Detectability Gap:**
