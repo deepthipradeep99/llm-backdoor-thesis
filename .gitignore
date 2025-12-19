@@ -45,4 +45,5 @@ wandb/
 
 # Optional: large experiment outputs
 outputs/
+*.pdf
 
